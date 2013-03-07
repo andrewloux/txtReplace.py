@@ -26,7 +26,8 @@ for textfile in textfiles:
 		start = contents.find(findarg,start)
 		end = start+len(findarg)
 		contents = contents[:start]+replacearg+contents[end:]
-		start = end+1
+		start = start+len(replacearg)		#begin next pass right after what was added
+		
 	f.close()
 	g = open(textfile,'w')
 	g.write(contents)
