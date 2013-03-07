@@ -10,7 +10,7 @@ Launch this script in the parent directory of your text files.
 For example:
 
 <pre>
-- Parent *(location of script)*
+- Parent (location of script)
 	- Dir1
 	- Dir2
 	- Dir3
