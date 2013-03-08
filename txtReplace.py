@@ -1,4 +1,7 @@
-import os, re, argparse
+#!/usr/bin/env python2
+import os
+import re
+import argparse
 
 parser = argparse.ArgumentParser(description='Mass single argument text file find and replace.')
 parser.add_argument('-s','--source', help='Folder containing source text files.', required=True)
@@ -9,7 +12,7 @@ args = parser.parse_args()
 textfiles = []
 for root, dirnames, filenames in os.walk(args.source):
     for filename in filter(lambda s: s.endswith(".txt"), filenames):
-      textfiles.append(os.path.join(root, filename))
+        textfiles.append(os.path.join(root, filename))
 
 args.find, args.replace = map(re.escape, [args.find, args.replace])
 for textfile in textfiles:
