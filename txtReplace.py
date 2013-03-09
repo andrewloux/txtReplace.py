@@ -1,13 +1,13 @@
 #!/usr/bin/env python2
 import os
 import re
-import argparse
+import sys
 
-parser = argparse.ArgumentParser(description='Mass single argument text file find and replace.')
-parser.add_argument('-s','--source', help='Folder containing source text files.', required=True)
-parser.add_argument('-f','--find', help='Find argument', required=True)
-parser.add_argument('-r','--replace', help='Replace argument', required=True)
-args = parser.parse_args()
+try:
+   scriptname, source, find, replace = argv
+except:
+    print( """Invalid arguments passed. Usage:\n scriptname.py source-path find-argument replace-argument""")
+    sys.exit()
 
 textfiles = []
 for root, dirnames, filenames in os.walk(args.source):
