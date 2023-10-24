@@ -1,26 +1,45 @@
-#!/usr/bin/env python2
+#! /usr/bin/python
+# -*- coding: utf-8 -*-
+
 import os
 import re
 import sys
 
 try:
-   scriptname, source, find, replace = argv
+   args = sys.argv
+   sourcearg = args[1]
+   findarg = args[2]
+   replacearg = args[3]
 except:
-    print( """Invalid arguments passed. Usage:\n scriptname.py source-path find-argument replace-argument""")
+    print( """Invalid arguments passed. Usage:\n scriptname.py source-path findtring replacetring""")
     sys.exit()
 
+# input from user
+confirm = input("Will replace strings in files located in {} and all subfolders. Is this what you want to do? (Y/N)\n".format(sourcearg))
+if confirm.lower() != "y" and confirm.lower() != "yes":
+    print("Exiting.")
+    sys.exit()
+
+count = 0
+
 textfiles = []
-for root, dirnames, filenames in os.walk(args.source):
-    for filename in filter(lambda s: s.endswith(".txt"), filenames):
+for root, dirnames, filenames in os.walk(sourcearg):
+    for filename in [s for s in filenames if s.endswith(".txt")]:
+        print("Processing: {}".format(filename))
         textfiles.append(os.path.join(root, filename))
 
-args.find, args.replace = map(re.escape, [args.find, args.replace])
+findarg, replacearg = list(map(re.escape, [findarg, replacearg]))
 for textfile in textfiles:
     with open(textfile, 'r') as f:
-        content, count = re.subn(args.find, args.replace, f.read())
+            try:
+                content, count = re.subn(findarg, replacearg, f.read())
+                count += 1
+            except UnicodeDecodeError:
+                print("ERROR: UnicodeDecodeError")
 
     with open(textfile, 'w') as f:
         f.write(content)
+        count -= 1
 
-print "Replaced {} occurences of {} in {}".format(
-    str(count), args.find, args.source)
+print("Replaced {} occurences of {} in {}".format(
+    str(count), findarg, sourcearg))

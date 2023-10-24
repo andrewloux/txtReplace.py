@@ -21,4 +21,4 @@ Where Dir1, Dir2 and Dir3 contain the text files.
 Usage
 -----
 
-	$$ python txtReplace.py -s [source parent path] -f [find argument] -r [replace argument]
+	$$ python txtReplace.py [full source parent path] [string to replace] [replacement string]
