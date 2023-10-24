@@ -7,12 +7,9 @@ import sys
 
 try:
    args = sys.argv
-   #print(args)
-   #args['scriptname'] = args.argv[0]
    sourcearg = args[1]
    findarg = args[2]
    replacearg = args[3]
-   # scriptname, source, find, replace = argv
 except:
     print( """Invalid arguments passed. Usage:\n scriptname.py source-path findtring replacetring""")
     sys.exit()
